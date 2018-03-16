@@ -1,5 +1,6 @@
 import axios from 'axios'
 
+const GMAPS_URL = 'https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyAFGFzc9BcMwW9UT2N5mYj9PeT4bXs8a6o'
 const API_URL = 'https://803votn6w7.execute-api.us-west-2.amazonaws.com/dev/public/graphql'
 
 export const changeQuery = event => ({
@@ -7,12 +8,13 @@ export const changeQuery = event => ({
   payload: event.target.value
 })
 
-export const search = (description) => {
+export const search = (address) => {
   return (dispatch, getState) => {
-    const description = getState().search.query
-    const search = description ? `&description__regex=/${description}/` : ''
-    axios.get(`${API_URL}?sort=-createdAt${search}`)
-      .then(res => dispatch({ type: 'SEARCH_SEARCHED', payload: res.data }))
+    const address = getState().search.query
+    if (address) {
+      axios.get(`${GMAPS_URL}&address=${address}`)
+        .then(res => dispatch({ type: 'SEARCH_SEARCHED', payload: res.data }))
+    }
   }
 }
 

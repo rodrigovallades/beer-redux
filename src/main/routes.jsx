@@ -6,8 +6,8 @@ import Results from '../results/results'
 
 export default props => (
   <Router history={hashHistory}>
-    <Route path='/search' component={Search} />
+    <Route path='/' component={Search} />
     <Route path='/results' component={Results} />
-    <Redirect from='*' to='/search' />
+    <Redirect from='*' to='/' />
   </Router>
 )
