@@ -1,6 +1,6 @@
 const INITIAL_STATE = {
   query: '',
-  list: []
+  address: {}
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -8,9 +8,9 @@ export default (state = INITIAL_STATE, action) => {
     case 'QUERY_CHANGED':
       return { ...state, query: action.payload }
     case 'SEARCH_SEARCHED':
-      return { ...state, list: action.payload }
+      return { ...state, address: action.payload }
     case 'SEARCH_CLEAR':
-      return { ...state, query: '' }
+      return { ...state, query: '', address: {} }
     default:
       return state
   }
