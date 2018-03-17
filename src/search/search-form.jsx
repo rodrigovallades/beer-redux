@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import IconButton from '../template/icon-button'
-import SearchAddress from '../search/search-address'
+import ExtraAddressInfo from '../search/search-address'
 import { changeQuery, search, clear } from './search-actions'
 
 class SearchForm extends Component {
@@ -27,10 +27,10 @@ class SearchForm extends Component {
     }
   }
 
-  renderAddress(address) {
+  renderExtraAddressInfo(address) {
     if (address.results) {
       return (
-        <SearchAddress address={address.results[0].formatted_address}/>        
+        <ExtraAddressInfo address={address.results[0].formatted_address}/>
       )
     }
   }
@@ -46,6 +46,7 @@ class SearchForm extends Component {
           onChange={this.props.changeQuery}
           onKeyUp={this.keyHandler}
           value={this.props.query} />
+        {this.renderExtraAddressInfo(address)}
         <IconButton
           style='info'
           icon='search'
@@ -54,8 +55,6 @@ class SearchForm extends Component {
           style='default'
           icon='close'
           onClick={() => clear()} />
-
-        {this.renderAddress(address)}
       </div>
     )
   }
